@@ -25,8 +25,58 @@ public class Alien {
 		this.precioOjo = this.tamanio*.05;
 		
 	}
+
+	public int getTamanio() {
+		return tamanio;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public int getNumeroOjos() {
+		return numeroOjos;
+	}
+
+	public int getNumeroBrazos() {
+		return numeroBrazos;
+	}
+
+	public int getNumeroPies() {
+		return numeroPies;
+	}
+
+	public double getPrecioExtremidad() {
+		return precioExtremidad;
+	}
+
+	public double getPrecioOjo() {
+		return precioOjo;
+	}
+
+	public double getPrecioCuerpo() {
+		return precioCuerpo;
+	}
+
+	@Override
+	public String toString() {
+		return "Alien [tamanio=" + tamanio + ", color=" + color + ", numeroOjos=" + numeroOjos + ", numeroBrazos="
+				+ numeroBrazos + ", numeroPies=" + numeroPies + ", precioExtremidad=" + precioExtremidad
+				+ ", precioOjo=" + precioOjo + ", precioCuerpo=" + precioCuerpo + "]";
+	}
 	
-	
+	public void imprimir() {
+		String mensaje="Tamaño: "+tamanio
+				+"Color: "+color
+				+"N° Ojos: "+numeroOjos
+				+"N° Brazos: "+numeroBrazos
+				+"N° Pies: "+numeroPies
+				+"Precio extremidad: "+String.format("%.2f",precioExtremidad)
+				+"Precio Ojo: "+String.format("%.2f",precioOjo)
+				+"Precio Cuerpo: "+String.format("%.2f",precioCuerpo);
+				
+		System.out.println(mensaje);
+	}
 	
 	
 }
