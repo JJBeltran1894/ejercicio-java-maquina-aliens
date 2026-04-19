@@ -9,6 +9,7 @@ public class Alien {
 	private double precioExtremidad;
 	private double precioOjo;
 	private double precioCuerpo;
+	private double precioTotal;
 
 	
 	public Alien(int tamanio, String color) {
@@ -24,7 +25,7 @@ public class Alien {
 		this.precioCuerpo = this.tamanio*0.2;
 		this.precioExtremidad = this.tamanio*0.1;
 		this.precioOjo = this.tamanio*.05;
-
+		this.precioTotal =0.0;
 		
 	}
 
@@ -60,6 +61,10 @@ public class Alien {
 		return precioCuerpo;
 	}
 	
+	public double getPrecioTotal() {
+		return precioTotal;
+	}
+	
 	private int sumarExtremidades(int nuevasExtremidades) {
 		int extremidades = numeroBrazos + numeroPies + nuevasExtremidades;
 		return extremidades;
@@ -70,7 +75,7 @@ public class Alien {
 			return false;
 		} else {
 			this.numeroBrazos += cantidad;
-			
+			this.calcularPrecioTotal();
 			return true;
 		}
 	}
@@ -80,6 +85,7 @@ public class Alien {
 			return false;
 		} else {
 			this.numeroPies += cantidad;
+			this.calcularPrecioTotal();
 			return true;
 		}
 	}
@@ -95,31 +101,39 @@ public class Alien {
 	public boolean agregarOjos(int cantidad) {
 		if (tamanio <= 10 && validarNumeroOjos(cantidad, 3)) {
 			numeroOjos += cantidad;
+			this.calcularPrecioTotal();
 			return true;
 		} else if (tamanio > 10 && tamanio <= 20 && validarNumeroOjos(cantidad, 5)) {
 			numeroOjos += cantidad;
+			this.calcularPrecioTotal();
 			return true;
 		} else if (tamanio > 20 && validarNumeroOjos(cantidad, 7)) {
 			numeroOjos += cantidad;
+			this.calcularPrecioTotal();
 			return true;
 		} else {
 			return false;
 		}
 
 	}
+	
+	public void calcularPrecioTotal() {
+		this.precioTotal = precioCuerpo + (numeroBrazos + numeroPies) * precioExtremidad + numeroOjos * precioOjo;
+	}
 
 	@Override
 	public String toString() {
 		return "Alien [tamanio=" + tamanio + ", color=" + color + ", numeroOjos=" + numeroOjos + ", numeroBrazos="
 				+ numeroBrazos + ", numeroPies=" + numeroPies + ", precioExtremidad=" + precioExtremidad
-				+ ", precioOjo=" + precioOjo + ", precioCuerpo=" + precioCuerpo + "]";
+				+ ", precioOjo=" + precioOjo + ", precioCuerpo=" + precioCuerpo +", precioTotal=" + precioTotal + "]";
 	}
 
 	public void imprimir() {
 		String mensaje = "---------\nTamaño: " + tamanio + "\nColor: " + color + "\nN° Ojos: " + numeroOjos
 				+ "\nN° Brazos: " + numeroBrazos + "\nN° Pies: " + numeroPies + "\nPrecio extremidad: "
 				+ String.format("%.2f", precioExtremidad) + "\nPrecio Ojo: " + String.format("%.2f", precioOjo)
-				+ "\nPrecio Cuerpo: " + String.format("%.2f", precioCuerpo);
+				+ "\nPrecio Cuerpo: " + String.format("%.2f", precioCuerpo)
+				+ "\nPrecio Total: " + String.format("%.2f", precioTotal);
 
 		System.out.println(mensaje);
 	}

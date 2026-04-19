@@ -227,7 +227,6 @@ import java.io.PrintStream;
 	        // Intentar agregar 1 más debe fallar
 	        assertFalse(alien.agregarOjos(1), "No debe permitir más de 7 ojos en tamaño grande.");
 	    }
-
-	    
+	    	    
 	    
 	}
