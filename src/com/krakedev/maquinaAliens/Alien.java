@@ -9,6 +9,7 @@ public class Alien {
 	private double precioExtremidad;
 	private double precioOjo;
 	private double precioCuerpo;
+
 	
 	public Alien(int tamanio, String color) {
 		if (tamanio<5) {
@@ -23,6 +24,7 @@ public class Alien {
 		this.precioCuerpo = this.tamanio*0.2;
 		this.precioExtremidad = this.tamanio*0.1;
 		this.precioOjo = this.tamanio*.05;
+
 		
 	}
 
@@ -57,6 +59,8 @@ public class Alien {
 	public double getPrecioCuerpo() {
 		return precioCuerpo;
 	}
+	
+
 
 	@Override
 	public String toString() {
@@ -64,19 +68,14 @@ public class Alien {
 				+ numeroBrazos + ", numeroPies=" + numeroPies + ", precioExtremidad=" + precioExtremidad
 				+ ", precioOjo=" + precioOjo + ", precioCuerpo=" + precioCuerpo + "]";
 	}
-	
+
 	public void imprimir() {
-		String mensaje="---------\nTamaño: "+tamanio
-				+"\nColor: "+color
-				+"\nN° Ojos: "+numeroOjos
-				+"\nN° Brazos: "+numeroBrazos
-				+"\nN° Pies: "+numeroPies
-				+"\nPrecio extremidad: "+String.format("%.2f",precioExtremidad)
-				+"\nPrecio Ojo: "+String.format("%.2f",precioOjo)
-				+"\nPrecio Cuerpo: "+String.format("%.2f",precioCuerpo);
-				
+		String mensaje = "---------\nTamaño: " + tamanio + "\nColor: " + color + "\nN° Ojos: " + numeroOjos
+				+ "\nN° Brazos: " + numeroBrazos + "\nN° Pies: " + numeroPies + "\nPrecio extremidad: "
+				+ String.format("%.2f", precioExtremidad) + "\nPrecio Ojo: " + String.format("%.2f", precioOjo)
+				+ "\nPrecio Cuerpo: " + String.format("%.2f", precioCuerpo);
+
 		System.out.println(mensaje);
 	}
-	
 	
 }

@@ -1,4 +1,6 @@
-package com.krakedev.maquinaAliens;
+package com.krakedev.maquinaAliens.test;
+
+import com.krakedev.maquinaAliens.Alien;
 
 public class TestConstructores {
 
