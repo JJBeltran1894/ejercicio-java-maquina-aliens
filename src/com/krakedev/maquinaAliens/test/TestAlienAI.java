@@ -228,5 +228,39 @@ import java.io.PrintStream;
 	        assertFalse(alien.agregarOjos(1), "No debe permitir más de 7 ojos en tamaño grande.");
 	    }
 	    	    
-	    
+	    @Test
+	    public void testCalculoPrecioTotalAutomatico() {
+	        // Alien de 10 cm
+	        // Precio cuerpo: 2.0 (20%)
+	        // Precio extremidad: 1.0 (10%)
+	        // Precio ojo: 0.5 (5%)
+	        Alien alien = new Alien(10, "Negro");
+	        
+	        // Precio inicial solo con cuerpo: 2.0
+	        // (Asumiendo que calcularPrecioTotal se llama en el constructor o da 0. 
+	        // Si no lo llamaste en el constructor, aquí dará 0. Lo ideal es llamarlo al final del constructor también).
+	        alien.calcularPrecioTotal(); // Lo forzamos por si acaso no está en el constructor
+	        assertEquals(2.0, alien.getPrecioTotal(), DELTA, "El precio base debe ser solo el del cuerpo.");
+	        
+	        // Agregamos 2 brazos (2 * 1.0 = +2.0)
+	        alien.agregarBrazos(2);
+	        // El precio total debió actualizarse a 4.0
+	        assertEquals(4.0, alien.getPrecioTotal(), DELTA, "El precio debió actualizarse al agregar brazos.");
+	        
+	        // Agregamos 2 pies (2 * 1.0 = +2.0)
+	        alien.agregarPies(2);
+	        // El precio total debió actualizarse a 6.0
+	        assertEquals(6.0, alien.getPrecioTotal(), DELTA, "El precio debió actualizarse al agregar pies.");
+	        
+	        // Agregamos 3 ojos (3 * 0.5 = +1.5)
+	        alien.agregarOjos(3);
+	        // El precio total debió actualizarse a 7.5
+	        assertEquals(7.5, alien.getPrecioTotal(), DELTA, "El precio debió actualizarse al agregar ojos.");
+	        
+	        // Intentamos un caso inválido: agregar más ojos de los permitidos
+	        boolean fallo = alien.agregarOjos(1);
+	        assertFalse(fallo);
+	        // El precio no debió cambiar al fallar la asignación
+	        assertEquals(7.5, alien.getPrecioTotal(), DELTA, "El precio no debe alterarse si la agregación falla.");
+	    }
 	}
