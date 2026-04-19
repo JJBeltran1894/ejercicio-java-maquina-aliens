@@ -83,7 +83,30 @@ public class Alien {
 			return true;
 		}
 	}
+	
+	private boolean validarNumeroOjos(int ojosNuevos, int limiteOjos) {
+		if (numeroOjos + ojosNuevos <= limiteOjos) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
+	public boolean agregarOjos(int cantidad) {
+		if (tamanio <= 10 && validarNumeroOjos(cantidad, 3)) {
+			numeroOjos += cantidad;
+			return true;
+		} else if (tamanio > 10 && tamanio <= 20 && validarNumeroOjos(cantidad, 5)) {
+			numeroOjos += cantidad;
+			return true;
+		} else if (tamanio > 20 && validarNumeroOjos(cantidad, 7)) {
+			numeroOjos += cantidad;
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 
 	@Override
 	public String toString() {

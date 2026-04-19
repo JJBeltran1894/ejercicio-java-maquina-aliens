@@ -195,7 +195,39 @@ import java.io.PrintStream;
 	        assertEquals(0, alien.getNumeroBrazos(), "El número de brazos debe mantenerse en 0 porque la operación falló.");
 	    }
 
-	    
+	    @Test
+	    public void testAgregarOjosRangoPequeno() {
+	        // Alien pequeño (5 - 10 cm) -> Límite: 3 ojos
+	        Alien alien = new Alien(8, "Blanco");
+	        
+	        // Agregar 3 ojos debe ser válido
+	        assertTrue(alien.agregarOjos(3), "Debe permitir 3 ojos para un alien de 8cm.");
+	        // Intentar agregar 1 más debe fallar
+	        assertFalse(alien.agregarOjos(1), "No debe permitir más de 3 ojos en tamaño pequeño.");
+	    }
+
+	    @Test
+	    public void testAgregarOjosRangoMediano() {
+	        // Alien mediano (>10 - 20 cm) -> Límite: 5 ojos
+	        Alien alien = new Alien(15, "Verde");
+	        
+	        // Agregar 5 ojos debe ser válido
+	        assertTrue(alien.agregarOjos(5), "Debe permitir 5 ojos para un alien de 15cm.");
+	        // Intentar agregar 1 más debe fallar
+	        assertFalse(alien.agregarOjos(1), "No debe permitir más de 5 ojos en tamaño mediano.");
+	    }
+
+	    @Test
+	    public void testAgregarOjosRangoGrande() {
+	        // Alien grande (>20 - 30 cm) -> Límite: 7 ojos
+	        Alien alien = new Alien(25, "Rojo");
+	        
+	        // Agregar 7 ojos debe ser válido
+	        assertTrue(alien.agregarOjos(7), "Debe permitir 7 ojos para un alien de 25cm.");
+	        // Intentar agregar 1 más debe fallar
+	        assertFalse(alien.agregarOjos(1), "No debe permitir más de 7 ojos en tamaño grande.");
+	    }
+
 	    
 	    
 	}
