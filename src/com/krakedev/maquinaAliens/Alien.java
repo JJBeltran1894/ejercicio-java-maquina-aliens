@@ -60,6 +60,29 @@ public class Alien {
 		return precioCuerpo;
 	}
 	
+	private int sumarExtremidades(int nuevasExtremidades) {
+		int extremidades = numeroBrazos + numeroPies + nuevasExtremidades;
+		return extremidades;
+	}
+
+	public boolean agregarBrazos(int cantidad) {
+		if (sumarExtremidades(cantidad) > 10) {
+			return false;
+		} else {
+			this.numeroBrazos += cantidad;
+			
+			return true;
+		}
+	}
+
+	public boolean agregarPies(int cantidad) {
+		if (sumarExtremidades(cantidad) > 10) {
+			return false;
+		} else {
+			this.numeroPies += cantidad;
+			return true;
+		}
+	}
 
 
 	@Override

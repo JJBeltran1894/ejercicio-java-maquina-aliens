@@ -6,7 +6,7 @@ import com.krakedev.maquinaAliens.Alien;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
@@ -131,6 +131,70 @@ import java.io.PrintStream;
 	            System.setOut(consolaOriginal);
 	        }
 	    }
+	    
+	    @Test
+	    public void testAgregarExtremidadesCasosValidos() {
+	        // Validación: Verifica que se puedan agregar extremidades dentro del límite permitido.
+	        Alien alien = new Alien(15, "Rojo");
+	        
+	        // Agregar 4 brazos debe retornar true
+	        assertTrue(alien.agregarBrazos(4), "Debe permitir agregar 4 brazos.");
+	        assertEquals(4, alien.getNumeroBrazos(), "El número de brazos debe ser 4.");
+	        
+	        // Agregar 2 pies debe retornar true (Total = 6 extremidades)
+	        assertTrue(alien.agregarPies(2), "Debe permitir agregar 2 pies.");
+	        assertEquals(2, alien.getNumeroPies(), "El número de pies debe ser 2.");
+	    }
+
+	    @Test
+	    public void testAgregarExtremidadesCasoLimite() {
+	        // Validación: Verifica el comportamiento en la frontera exacta (10 extremidades).
+	        Alien alien = new Alien(20, "Azul");
+	        
+	        // Agregar exactamente 10 brazos de una vez debe ser permitido
+	        assertTrue(alien.agregarBrazos(10), "Debe permitir alcanzar el límite exacto de 10 brazos.");
+	        assertEquals(10, alien.getNumeroBrazos(), "Debe tener 10 brazos asignados.");
+	        
+	        // Intentar agregar 1 pie extra cuando ya hay 10 extremidades debe fallar
+	        assertFalse(alien.agregarPies(1), "No debe permitir exceder el límite de 10 extremidades.");
+	        assertEquals(0, alien.getNumeroPies(), "El número de pies debe mantenerse en 0.");
+	    }
+
+	    @Test
+	    public void testAgregarExtremidadesCasosCombinadosYExceso() {
+	        // Validación: Verifica combinaciones que sobrepasan el límite tras varias asignaciones.
+	        Alien alien = new Alien(25, "Gris");
+	        
+	        // 1. Agregamos 6 brazos (Válido)
+	        assertTrue(alien.agregarBrazos(6), "Debe permitir agregar 6 brazos.");
+	        
+	        // 2. Intentamos agregar 5 pies (6 + 5 = 11 -> Inválido)
+	        assertFalse(alien.agregarPies(5), "No debe permitir agregar 5 pies si ya hay 6 brazos (supera 10).");
+	        
+	        // El número de pies no debió alterarse
+	        assertEquals(0, alien.getNumeroPies(), "Si falla la asignación, los pies no deben modificarse.");
+	        
+	        // 3. Agregamos 4 pies para llegar al límite exacto (6 + 4 = 10 -> Válido)
+	        assertTrue(alien.agregarPies(4), "Debe permitir agregar 4 pies para completar las 10 extremidades.");
+	        assertEquals(4, alien.getNumeroPies(), "Debe tener 4 pies asignados.");
+	    }
+	    
+	    @Test
+	    public void testAgregarBrazosExcedeLimite() {
+	        // Validación: Verifica que agregarBrazos retorne false si supera el límite.
+	        Alien alien = new Alien(15, "Morado");
+	        
+	        // Preparamos el terreno agregando 8 pies
+	        alien.agregarPies(8); 
+	        
+	        // Acción: Intentamos agregar 3 brazos (8 + 3 = 11 -> Inválido)
+	        boolean resultado = alien.agregarBrazos(3);
+	        
+	        // Verificaciones
+	        assertFalse(resultado, "Debe retornar false al intentar superar las 10 extremidades agregando brazos.");
+	        assertEquals(0, alien.getNumeroBrazos(), "El número de brazos debe mantenerse en 0 porque la operación falló.");
+	    }
+
 	    
 	    
 	    
